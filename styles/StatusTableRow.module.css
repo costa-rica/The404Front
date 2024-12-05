@@ -1,0 +1,60 @@
+.toggleCell {
+  cursor: pointer;
+}
+
+/* Show additional content when toggled */
+.additionalContent {
+  display: block;
+  /* background-color: purple; */
+}
+.additionalContent.visible {
+  display: block;
+}
+
+.additionalContent.hidden {
+  display: none;
+}
+
+.divAddContentTitle {
+  color: var(--med-text-color);
+}
+.divAddContent {
+  color: white;
+  padding-left: 0.25rem;
+  /* handle small screen long text */
+  word-wrap: break-word; /* Ensure long words or URLs wrap */
+  overflow-wrap: break-word; /* Ensure wrapping in modern browsers */
+  word-break: break-all; /* Break words at arbitrary points for extremely long text */
+  hyphens: auto; /* Adds hyphenation when possible */
+}
+.tdBtnStatus {
+  display: table-cell;
+  text-align: center;
+}
+.btnStatus {
+  border-radius: 12px;
+  padding: 0.25rem;
+}
+.tdDivNameOfApp {
+  color: var(--highlight-yellow);
+  font-size: larger;
+}
+.tdPort {
+  display: none;
+}
+/* Large screens (media query) */
+@media (min-width: 768px) {
+  .additionalContent {
+    display: block !important; /* Override visibility state */
+  }
+  .spanAppName {
+    font-size: xx-large;
+  }
+  .spanAppProjectPath {
+    display: inline;
+  }
+  .tdPort {
+    display: table-cell;
+    text-align: center;
+  }
+}

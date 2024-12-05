@@ -1,0 +1,45 @@
+.tabsContainer {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  position: fixed;
+  top: 10rem;
+  left: 0;
+  right: 0;
+  z-index: 900; /* Ensures the tabs appear above other content */
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+.activeTab {
+  background-color: #0070f3;
+  color: white;
+}
+
+.contentContainer {
+  padding: 20px;
+  background-color: black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 13rem;
+}
+
+.logContent {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: monospace;
+  font-size: 14px;
+  color: white;
+}

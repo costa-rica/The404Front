@@ -1,0 +1,68 @@
+.statusPage {
+  height: calc(
+    100vh - var(--header-height)
+  ); /* Takes up the remaining screen height below the navbar */
+  overflow-y: auto; /* Enables scrolling for the page */
+  background-color: var(--background-color);
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Horizontally center tableSuper */
+  align-items: flex-start;
+}
+.tableSuper {
+  width: 95%; /* Constrain the table's width to 95% of the container */
+  display: flex; /* Use flexbox for its child (the table) */
+  justify-content: center; /* Center the table horizontally */
+}
+.table {
+  width: 95%;
+  max-width: 100%;
+  border-collapse: collapse;
+  background-color: var(--background-color);
+  table-layout: auto; /* Allow columns to adjust based on content */
+}
+
+.table th {
+  position: sticky;
+  top: 0; /* Adjust this based on your navbar height */
+  z-index: 1; /* Keep it above other content */
+}
+
+/* Makes thead background color of blue and add line below that sticks*/
+.table thead {
+  position: sticky;
+  top: 0; /* Keep the entire thead at the top */
+  z-index: 1; /* Ensure it remains above table rows */
+  background-color: white; /* Set background to avoid transparency */
+  background-color: var(--background-color);
+}
+.table thead::after {
+  content: ""; /* Create a pseudo-element */
+  display: block; /* Ensure it acts as a block element */
+  position: absolute; /* Position relative to thead */
+  bottom: 0; /* Stick to the bottom of the thead */
+  left: 0;
+  width: 100%;
+  height: 1px; /* Thickness of the border */
+  background-color: #ddd; /* Match border color */
+}
+/* Above is for Stick header for table*/
+.thPort {
+  display: none;
+}
+.table th {
+  font-size: large;
+  padding: 1rem 0;
+}
+.table tbody > tr > td {
+  padding: 1rem;
+}
+
+/* Large screens (media query) */
+@media (min-width: 768px) {
+  .additionalContent {
+    display: block !important; /* Override visibility state */
+  }
+  .thPort {
+    display: table-cell;
+  }
+}
