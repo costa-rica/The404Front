@@ -1,6 +1,6 @@
-# The 404 Server Manager
+# The 404 Frontend
 
-This is the new one
+(version 3 - the latest)
 
 ## install app
 
