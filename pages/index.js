@@ -26,7 +26,12 @@ function Index() {
         );
         const responseJson = await response.json();
         console.log(responseJson);
-        dispatch(setCurrentMachineDisplay(responseJson));
+        const currentMachineDisplay = {
+          machineName: responseJson.machineName,
+          urlFor404Api: responseJson.urlFor404Api,
+        };
+
+        dispatch(setCurrentMachineDisplay(currentMachineDisplay));
       } catch {
         console.error("NICK Custom error ====> ");
         console.error("Error fetching data:");
