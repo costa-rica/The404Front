@@ -34,7 +34,10 @@ export default function NavigationBar() {
       <div className={styles.divHeaderTop}>
         <div className={styles.divHeaderTopLeft}>
           <h1 className={styles.h1AppName}>The 404 Server Manager</h1>
-          <h2 className={styles.h2MachineName}>{user.machineName}</h2>
+          {/* <h2 className={styles.h2MachineName}>{user.machineName}</h2> */}
+          <h2 className={styles.h2MachineName}>
+            {user.currentMachineDisplay.machineName}
+          </h2>
         </div>
         <div className={styles.divHeaderRight}>
           <button
@@ -53,6 +56,18 @@ export default function NavigationBar() {
             }`}
             ref={menuRef}
           >
+            <li className={styles.divHeaderRightLi}>
+              <a
+                className={
+                  currentPath === "/machines"
+                    ? styles.btnNavActive
+                    : styles.btnNav
+                }
+                href="/machines"
+              >
+                Machines
+              </a>
+            </li>
             <li className={styles.divHeaderRightLi}>
               <a
                 className={

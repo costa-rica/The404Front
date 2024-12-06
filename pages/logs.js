@@ -16,8 +16,10 @@ export default function Logs() {
 
   useEffect(() => {
     (async () => {
+      console.log("--- in useEffect Logs ---");
+      console.log(`${user.currentMachineDisplay.urlFor404Api}/logs/combined`);
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/logs/combined`,
+        `${user.currentMachineDisplay.urlFor404Api}/logs/combined`,
         {
           method: "GET",
           headers: {
@@ -26,40 +28,45 @@ export default function Logs() {
           },
         }
       );
-      const responseJson = await response.json();
-      console.log("response: ");
-      console.log(responseJson);
-      const pm2CombinedOutput = (
-        <div>
-          <h1>pm2CombinedOutput</h1>
-          <div>{responseJson.responseBody.pm2CombinedOutput}</div>
-        </div>
-      );
-      const dataPm2CombinedError = (
-        <div>
-          <h1>pm2CombinedError</h1>
-          <div>{responseJson.responseBody.dataPm2CombinedError}</div>
-        </div>
-      );
-      const syslog = (
-        <div>
-          <h1>syslog</h1>
-          <div>{responseJson.responseBody.syslog}</div>
-        </div>
-      );
 
-      const combinedLogs = (
-        <div>
-          <div>{pm2CombinedOutput}</div>
-          <div>{dataPm2CombinedError}</div>
-          <div>{syslog}</div>
-        </div>
-      );
-      // const logsTemp = responseJson.responseBody.map((elem, index) => {
-      //   return <div>elem</div>;
-      // });
-      // logsSetter(combinedLogs);
-      logsSetter(responseJson.responseBody);
+      if (response.status == 200) {
+        const responseJson = await response.json();
+        console.log("response: ");
+        console.log(responseJson);
+        logsSetter(responseJson.responseBody);
+        // window.alert(`Successfully added: ${resJson.machineName}`);
+      } else {
+        window.alert(
+          `There was a server error or you're not logged in: ${response.status}`
+        );
+      }
+
+      // const pm2CombinedOutput = (
+      //   <div>
+      //     <h1>pm2CombinedOutput</h1>
+      //     <div>{responseJson.responseBody.pm2CombinedOutput}</div>
+      //   </div>
+      // );
+      // const dataPm2CombinedError = (
+      //   <div>
+      //     <h1>pm2CombinedError</h1>
+      //     <div>{responseJson.responseBody.dataPm2CombinedError}</div>
+      //   </div>
+      // );
+      // const syslog = (
+      //   <div>
+      //     <h1>syslog</h1>
+      //     <div>{responseJson.responseBody.syslog}</div>
+      //   </div>
+      // );
+
+      // const combinedLogs = (
+      //   <div>
+      //     <div>{pm2CombinedOutput}</div>
+      //     <div>{dataPm2CombinedError}</div>
+      //     <div>{syslog}</div>
+      //   </div>
+      // );
     })(); // end of async ()
   }, []);
 
@@ -68,7 +75,6 @@ export default function Logs() {
     //   <HeaderCustom />
     <TemplateView>
       <div style={{ position: "relative" }}>
-        {/* Tabs */}
         <div className={styles.tabsContainer}>
           {["pm2CombinedOutput", "pm2CombinedError", "syslog"].map((tab) => (
             <button
@@ -87,7 +93,6 @@ export default function Logs() {
           ))}
         </div>
 
-        {/* Content */}
         <div className={styles.contentContainer}>
           <pre className={styles.logContent}>{logs[activeTab]}</pre>
         </div>

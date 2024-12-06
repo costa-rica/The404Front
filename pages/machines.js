@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
+import { setCurrentMachineDisplay } from "../reducers/user";
 
 function Machines() {
   const [machineListRows, machineListRowsSetter] = useState([]);
   const [newMachineUrl, newMachineUrlSetter] = useState([]);
   const [isModalOpen, isModalOpenSetter] = useState(false); // State to control modal visibility
   const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchMachines();
@@ -18,7 +20,7 @@ function Machines() {
   const fetchMachines = async () => {
     console.log("--- new fetch amchiehhns");
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/machines`,
+      `${user.currentMachineDisplay.urlFor404Api}/machines`,
       {
         method: "GET",
         headers: {
@@ -29,17 +31,19 @@ function Machines() {
     );
     if (response.status == 200) {
       const resJson = await response.json();
-      const machineListTemp = resJson.existingMachines.map((elem, index) => {
-        console.log(elem);
-        return (
-          <tr key={`tr${index}`}>
-            <td>{elem.machineName}</td>
-            <td>{elem.urlFor404Api}</td>
-          </tr>
-        );
-      });
-      machineListRowsSetter(machineListTemp);
-      console.log(resJson.appList);
+      // const machineListTemp = resJson.existingMachines.map((elem, index) => {
+      //   console.log(elem);
+      //   return (
+      //     <tr key={`tr${index}`}>
+      //       <td>{elem.machineName}</td>
+      //       <td>{elem.urlFor404Api}</td>
+      //     </tr>
+      //   );
+      // });
+      // machineListRowsSetter(machineListTemp);
+      machineListRowsSetter(resJson.existingMachines);
+      console.log("--- machineListRows ---");
+      console.log(machineListRows);
     } else {
       window.alert(`There was a server error: ${response.status}`);
     }
@@ -49,7 +53,7 @@ function Machines() {
     console.log(" - add machine");
     console.log(newMachineUrl);
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/machines`,
+      `${user.currentMachineDisplay.urlFor404Api}/machines`,
       {
         method: "POST",
         headers: {
@@ -69,6 +73,11 @@ function Machines() {
     } else {
       window.alert(`There was a server error: ${response.status}`);
     }
+  };
+
+  const btnDisplay = (objMachineNameAndUrl) => {
+    console.log("handleSttus button");
+    dispatch(setCurrentMachineDisplay(objMachineNameAndUrl));
   };
 
   return (
@@ -120,16 +129,44 @@ function Machines() {
               <thead>
                 <tr>
                   <th className={styles.thAppName}>Machine name</th>
-                  <th>Status</th>
+                  <th>Connected machine</th>
                 </tr>
               </thead>
               <tbody>
-                {machineListRows}
-
-                {Array.from({ length: 100 }, (_, index) => (
-                  <tr key={index}>
-                    <td>Row {index + 1} Data 1</td>
-                    <td>Row {index + 1} Data 2</td>
+                {machineListRows.map((elem, index) => (
+                  <tr key={index} className={styles.trCustom}>
+                    <td className={`${styles.tdMachineName} tdWrapAll`}>
+                      {elem.machineName}
+                      <div className={styles.tdMachineNameUrl}>
+                        {elem.urlFor404Api}
+                      </div>
+                      <div className={styles.tdMachineNameBtnReload}>
+                        <button>Reload</button>
+                      </div>
+                    </td>
+                    <td className={styles.tdConnectedMachine}>
+                      <button
+                        className={styles.btnDisplay}
+                        style={{
+                          backgroundColor:
+                            user.currentMachineDisplay?.machineName ===
+                            elem.machineName
+                              ? "green"
+                              : "",
+                        }}
+                        onClick={() =>
+                          btnDisplay({
+                            machineName: elem.machineName,
+                            urlFor404Api: elem.urlFor404Api,
+                          })
+                        }
+                      >
+                        {user.currentMachineDisplay?.machineName ===
+                        elem.machineName
+                          ? "Displaying"
+                          : "off"}
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

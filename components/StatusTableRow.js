@@ -24,7 +24,7 @@ export default function StatusTableRow(props) {
       appName: props.elem.appName,
     };
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/toggle-app`,
+      `${user.currentMachineDisplay.urlFor404Api}/status/toggle-app`,
       {
         method: "POST",
         headers: {

@@ -2,7 +2,8 @@ import styles from "../styles/Index.module.css";
 import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setMachineNameRedux } from "../reducers/user";
+// import { setMachineNameRedux } from "../reducers/user";
+import { setCurrentMachineDisplay } from "../reducers/user";
 import { useRouter } from "next/router";
 
 function Index() {
@@ -21,10 +22,23 @@ function Index() {
         );
         const responseJson = await response.json();
         console.log(responseJson);
-        dispatch(setMachineNameRedux(responseJson.machineName));
+        // dispatch(setMachineNameRedux(responseJson.machineName));
+        dispatch(setCurrentMachineDisplay(responseJson));
+        // dispatch(
+        //   setCurrentMachineDisplay({
+        //     machineName: responseJson.machineName,
+        //     urlFor404Api: null,
+        //   })
+        // );
       } catch {
         console.error("Error fetching data:");
-        dispatch(setMachineNameRedux("failed to get API response"));
+        // dispatch(setMachineNameRedux("failed to get API response"));
+        dispatch(
+          setCurrentMachineDisplay({
+            machineName: "failed to get API response",
+            urlFor404Api: null,
+          })
+        );
       }
     })();
   }, []);
@@ -37,7 +51,7 @@ function Index() {
       <div className={styles.divMainSub}>
         <div className={styles.divTitles}>
           <h1 className={styles.title}>The 404 Server Manager</h1>
-          <h2>{user.machineName}</h2>
+          <h2>{user.currentMachineDisplay.machineName}</h2>
         </div>
 
         <div className={styles.divInputsAndBtns}>

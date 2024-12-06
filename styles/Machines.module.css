@@ -138,3 +138,30 @@
 .closeModalButton:hover {
   background-color: darkred;
 } */
+
+/* Nick stuff Table */
+.trCustom {
+  /* margin-bottom: 11rem; */
+  /* background-color: green; */
+  border-bottom: 1px solid var(--med-text-color);
+}
+.tdMachineName {
+  font-size: larger;
+  color: var(--light-text-color);
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+.tdMachineNameUrl {
+  font-size: small;
+  color: var(--med-text-color);
+}
+.tdMachineNameBtnReload {
+  text-align: center;
+}
+.tdConnectedMachine {
+  text-align: center;
+}
+.btnDisplay {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}

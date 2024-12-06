@@ -56,6 +56,11 @@
 .table tbody > tr > td {
   padding: 1rem;
 }
+.trCustom {
+  /* margin-bottom: 11rem; */
+  /* background-color: green; */
+  border-bottom: 1px solid var(--med-text-color);
+}
 
 /* Large screens (media query) */
 @media (min-width: 768px) {

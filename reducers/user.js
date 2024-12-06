@@ -6,8 +6,10 @@ const initialState = {
     username: null,
     email: null,
     role: null,
-    machineName: null,
+    // machineName: null,
     password: null,
+    currentMachineDisplay: null, // {machineName: , urlFor404Api: }
+    allMachines: [],
   },
 };
 
@@ -15,9 +17,14 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setMachineNameRedux: (state, action) => {
-      state.value.machineName = action.payload;
+    // setMachineNameRedux: (state, action) => {
+    //   state.value.machineName = action.payload;
+    // },
+    setCurrentMachineDisplay: (state, action) => {
+      console.log(`- dans Redux: setCurrentMachineDisplay 🔔`);
+      state.value.currentMachineDisplay = action.payload;
     },
+
     loginUser: (state, action) => {
       console.log(`- dans Redux: loginUser 🔔`);
       state.value.token = action.payload.token;
@@ -37,5 +44,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setMachineNameRedux, loginUser } = userSlice.actions;
+export const { setCurrentMachineDisplay, loginUser } = userSlice.actions;
 export default userSlice.reducer;

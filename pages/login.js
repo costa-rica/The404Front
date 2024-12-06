@@ -20,7 +20,7 @@ export default function Login() {
     console.log("- handleClickReg 👀");
     const bodyObj = { email, password };
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`,
+      `${user.currentMachineDisplay.urlFor404Api}/users/login`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

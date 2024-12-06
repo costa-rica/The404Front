@@ -11,7 +11,7 @@ export default function Status() {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/list/pm2`,
+        `${user.currentMachineDisplay.urlFor404Api}/status/list/pm2`,
         {
           method: "GET",
           headers: {
@@ -26,7 +26,7 @@ export default function Status() {
         const appsListTemp = resJson.appList.map((elem, index) => {
           console.log(elem);
           return (
-            <tr key={`tr${index}`}>
+            <tr key={`tr${index}`} className={styles.trCustom}>
               <StatusTableRow elem={elem} />
             </tr>
           );

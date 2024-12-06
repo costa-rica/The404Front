@@ -22,7 +22,7 @@ export default function Register() {
   const handleClickReg = async () => {
     const bodyObj = { email, password };
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/register`,
+      `${user.currentMachineDisplay.urlFor404Api}/users/register`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
