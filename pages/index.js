@@ -28,10 +28,7 @@ function Index() {
         console.log(responseJson);
         const currentMachineDisplay = {
           machineName: responseJson.machineName,
-          urlFor404Api:
-            process.env.NEXT_PUBLIC_ENV === "test"
-              ? `http://${responseJson.urlFor404Api}`
-              : responseJson.urlFor404Api,
+          urlFor404Api: responseJson.urlFor404Api,
         };
 
         dispatch(setCurrentMachineDisplay(currentMachineDisplay));
