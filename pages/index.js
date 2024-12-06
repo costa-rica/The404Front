@@ -7,12 +7,16 @@ import { setCurrentMachineDisplay } from "../reducers/user";
 import { useRouter } from "next/router";
 
 function Index() {
+  console.log("start ---> URL");
+  console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/machineName`);
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
+    console.log("---> inside useEffect NO Async");
     (async () => {
+      console.log("---> inside useEffect Async");
       try {
         console.log("NEXT_PUBLIC_API_BASE_URL");
         console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
@@ -22,17 +26,10 @@ function Index() {
         );
         const responseJson = await response.json();
         console.log(responseJson);
-        // dispatch(setMachineNameRedux(responseJson.machineName));
         dispatch(setCurrentMachineDisplay(responseJson));
-        // dispatch(
-        //   setCurrentMachineDisplay({
-        //     machineName: responseJson.machineName,
-        //     urlFor404Api: null,
-        //   })
-        // );
       } catch {
+        console.error("NICK Custom error ====> ");
         console.error("Error fetching data:");
-        // dispatch(setMachineNameRedux("failed to get API response"));
         dispatch(
           setCurrentMachineDisplay({
             machineName: "failed to get API response",
