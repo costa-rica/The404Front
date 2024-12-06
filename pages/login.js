@@ -21,6 +21,7 @@ export default function Login() {
   const handleClickLogin = async () => {
     console.log("- handleClickReg 👀");
     const bodyObj = { email, password };
+
     const response = await fetch(
       `${user.currentMachineDisplay.urlFor404Api}/users/login`,
       {

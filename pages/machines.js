@@ -31,16 +31,7 @@ function Machines() {
     );
     if (response.status == 200) {
       const resJson = await response.json();
-      // const machineListTemp = resJson.existingMachines.map((elem, index) => {
-      //   console.log(elem);
-      //   return (
-      //     <tr key={`tr${index}`}>
-      //       <td>{elem.machineName}</td>
-      //       <td>{elem.urlFor404Api}</td>
-      //     </tr>
-      //   );
-      // });
-      // machineListRowsSetter(machineListTemp);
+
       machineListRowsSetter(resJson.existingMachines);
       console.log("--- machineListRows ---");
       console.log(machineListRows);
@@ -107,7 +98,13 @@ function Machines() {
                   <h2>Add new machine</h2>
                 </div>
                 <div>
-                  <p>This is a modal. Add your content here.</p>
+                  <p>
+                    Format for url:
+                    <ul style={{ listStyleType: "none" }}>
+                      <li>(1) "https://" will be added and</li>
+                      <li>(2) any ending "/" will be removed</li>
+                    </ul>
+                  </p>
                   <input
                     className={styles.inputNewMachineUrl}
                     onChange={(e) => newMachineUrlSetter(e.target.value)}
@@ -116,7 +113,7 @@ function Machines() {
                   />
                 </div>
                 <button
-                  className={styles.closeModalButton}
+                  className={styles.btnAddMachine}
                   onClick={() => handleAddMachine()}
                 >
                   Add Machine
