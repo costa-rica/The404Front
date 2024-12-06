@@ -8,7 +8,10 @@ const initialState = {
     role: null,
     // machineName: null,
     password: null,
-    currentMachineDisplay: null, // {machineName: , urlFor404Api: }
+    currentMachineDisplay: {
+      machineName: "Not machine connected yet",
+      urlFor404Api: null,
+    }, // {machineName: , urlFor404Api: }
     allMachines: [],
   },
 };
