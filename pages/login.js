@@ -11,6 +11,8 @@ export default function Login() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
+  console.log("Login ---> API URL");
+  console.log(`${user.currentMachineDisplay.urlFor404Api}/users/login`);
 
   const sendPasswordBackToParent = (passwordFromInputPasswordElement) => {
     passwordSetter(passwordFromInputPasswordElement);
