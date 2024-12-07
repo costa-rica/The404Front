@@ -4,10 +4,7 @@ import styles from "../styles/StatusTableRow.module.css";
 
 export default function StatusTableRow(props) {
   const user = useSelector((state) => state.user.value);
-  const [appStatus, appStatusSetter] = useState(
-    // props.elem.appName.includes("The404") ? props.elem.status == "online" ? "active" : "inactive"
-    props.elem.status == "online" ? "active" : "inactive"
-  );
+  const [appStatus, appStatusSetter] = useState(props.elem.status);
   const [additionalRowsVisible, additionalRowsVisibleSetter] = useState(false);
   const toggleAdditionalRowsVisible = () => {
     console.log("--> toggling");
