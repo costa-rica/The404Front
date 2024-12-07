@@ -13,7 +13,8 @@ export default function StatusTableRow(props) {
     console.log("--> toggling");
     additionalRowsVisibleSetter((prev) => !prev);
   };
-  const toggleStatus = async (appName) => {
+  const toggleStatus = async () => {
+    appName = props.elem.nameOfApp;
     console.log(`- in toggleStatus: ${appName}`);
     console.log(
       'props.elem.name.includes("The404"): ',
@@ -42,10 +43,10 @@ export default function StatusTableRow(props) {
         props.elem.name.includes("The404")
           ? responseJson.status == "restarted"
             ? "restarted"
-            : "inactive"
-          : responseJson.status == "started"
-          ? "active"
-          : "inactive"
+            : "offline"
+          : responseJson.status == "online"
+          ? "online"
+          : "offline"
       );
     } else {
       window.alert(`There was a server error: ${response.status}`);
@@ -107,7 +108,25 @@ export default function StatusTableRow(props) {
       </td>
       <td className={styles.tdPort}>{props.elem.port}</td>
       <td className={styles.tdBtnStatus}>
-        <button className={styles.btnStatus}>{props.elem.status}</button>
+        {props.elem.machineName === user.currentMachineDisplay.machineName ? (
+          <button
+            className={styles.btnStatus}
+            onClick={() => toggleStatus()}
+            style={{
+              backgroundColor: props.elem.status === "online" ? "green" : "",
+            }}
+          >
+            {props.elem.status}
+          </button>
+        ) : (
+          <div
+            style={{
+              color: props.elem.status === "online" ? "green" : "gray",
+            }}
+          >
+            {props.elem.status}
+          </div>
+        )}
       </td>
     </>
   );
