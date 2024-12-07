@@ -39,7 +39,7 @@ export default function StatusTableRow(props) {
       const responseJson = await response.json();
       console.log(responseJson);
       appStatusSetter(
-        props.elem.name.includes("The404")
+        props.elem.nameOfApp.includes("The404")
           ? responseJson.status == "restarted"
             ? "restarted"
             : "offline"
