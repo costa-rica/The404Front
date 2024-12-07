@@ -14,15 +14,17 @@ export default function StatusTableRow(props) {
     additionalRowsVisibleSetter((prev) => !prev);
   };
   const toggleStatus = async () => {
-    appName = props.elem.nameOfApp;
+    const appName = props.elem.nameOfApp;
     console.log(`- in toggleStatus: ${appName}`);
     console.log(
       'props.elem.name.includes("The404"): ',
-      props.elem.name.includes("The404")
+      props.elem.nameOfApp.includes("The404")
     );
+    console.log(`sending backend request to: `);
+    console.log(`${user.currentMachineDisplay.urlFor404Api}/status/toggle-app`);
     // if (appName == "The404ManagerBack") return;
     const bodyObj = {
-      appName: props.elem.appName,
+      appName: appName,
     };
     const response = await fetch(
       `${user.currentMachineDisplay.urlFor404Api}/status/toggle-app`,
@@ -113,18 +115,18 @@ export default function StatusTableRow(props) {
             className={styles.btnStatus}
             onClick={() => toggleStatus()}
             style={{
-              backgroundColor: props.elem.status === "online" ? "green" : "",
+              backgroundColor: appStatus === "online" ? "green" : "",
             }}
           >
-            {props.elem.status}
+            {appStatus}
           </button>
         ) : (
           <div
             style={{
-              color: props.elem.status === "online" ? "green" : "gray",
+              color: appStatus === "online" ? "green" : "gray",
             }}
           >
-            {props.elem.status}
+            {appStatus}
           </div>
         )}
       </td>
