@@ -41,13 +41,6 @@ export default function InputPassword(props) {
         onClick={togglePasswordVisibility}
         className={styles.iconEye}
         style={{ color: passwordVisible ? "#000" : "#aaa" }}
-        // style={{
-        //   position: "absolute",
-        //   fontSize: "1.5rem",
-        //   transform: "translate(11rem, 1.7rem)",
-        //   cursor: "pointer",
-        //   color: passwordVisible ? "#000" : "#aaa",
-        // }}
       />
     </div>
   );

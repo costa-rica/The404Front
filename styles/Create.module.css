@@ -1,0 +1,96 @@
+.divMainPageSuper {
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+.divMainPage {
+  width: 95%;
+  padding-top: 2rem;
+}
+.divInputGroupRadio {
+  display: flex;
+}
+.spanLabel {
+  color: var(--med-text-color);
+  padding: 1rem 0;
+  /* background-color: green; */
+}
+.spanRadio {
+  display: flex;
+  /* justify-content: space-evenly; */
+  align-items: center;
+  /* background-color: antiquewhite; */
+  width: 100%;
+}
+.form {
+  display: flex;
+  justify-content: space-evenly;
+  /* background-color: green; */
+  width: 100%;
+}
+.labelRadio {
+  color: var(--light-text-color);
+}
+.divInputGroupText {
+  display: flex;
+  padding: 1rem 0rem;
+}
+.spanLabelServer {
+  padding: 0;
+  white-space: nowrap; /* Prevents wrapping at spaces */
+  overflow: hidden; /* Ensures content stays within the container */
+  text-overflow: ellipsis; /* Optional: Adds "..." if the text overflows */
+  min-width: 8rem;
+}
+.spanLabelText {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  white-space: nowrap; /* Prevents wrapping at spaces */
+  overflow: hidden; /* Ensures content stays within the container */
+  text-overflow: ellipsis; /* Optional: Adds "..." if the text overflows */
+  min-width: 8rem;
+}
+.divBtnCreateFile {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 3rem;
+}
+
+.inputServerName {
+  width: 100%;
+  padding: 0.25rem;
+  border-radius: 0.4rem;
+  border-color: white;
+}
+.spanInput {
+  /* background-color: blueviolet; */
+  width: 80%;
+}
+.divIconPlus {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem;
+}
+.iconPlus {
+  color: green;
+  font-size: larger;
+}
+.iconMinus {
+  position: relative;
+  top: 0;
+  color: red;
+  font-size: larger;
+  cursor: pointer;
+  margin-left: -1.5rem;
+}
+.btnCreateFile {
+  background-color: var(--highlight-red);
+  color: white;
+  font-size: large;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border-width: 0;
+  cursor: pointer;
+}
