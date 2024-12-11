@@ -18,7 +18,7 @@ function Machines() {
   }, []);
 
   const fetchMachines = async () => {
-    console.log("--- new fetch amchiehhns");
+    console.log("--- fetchMachines");
     const response = await fetch(
       `${user.currentMachineDisplay.urlFor404Api}/machines`,
       {
@@ -34,7 +34,7 @@ function Machines() {
 
       machineListRowsSetter(resJson.existingMachines);
       console.log("--- machineListRows ---");
-      console.log(machineListRows);
+      console.log(resJson.existingMachines);
     } else {
       window.alert(`There was a server error: ${response.status}`);
     }
@@ -155,6 +155,8 @@ function Machines() {
                           btnDisplay({
                             machineName: elem.machineName,
                             urlFor404Api: elem.urlFor404Api,
+                            userHomeDir: elem.userHomeDir,
+                            nginxDir: elem.nginxDir,
                           })
                         }
                       >
