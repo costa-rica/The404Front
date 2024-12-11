@@ -13,6 +13,10 @@ function Create() {
   const [cwd, cwdSetter] = useState("");
   const [localIp, localIpSetter] = useState("");
   const [port, portSetter] = useState("");
+  const [
+    selectedStoreNginxFilePathRadio,
+    selectedStoreNginxFilePathRadioSetter,
+  ] = useState("");
 
   const handleServerNameChange = (index, value) => {
     const updatedServerNames = [...serverNames];
@@ -53,6 +57,7 @@ function Create() {
       nginxDir: selectedRadioNginx,
       serverNames: serverNamesStringCommaSeparated,
       port: port,
+      storeNginxFilePath: selectedStoreNginxFilePathRadio,
     };
     if (cwd) {
       reqBodyObj = { ...reqBodyObj, appCwd: cwd };
@@ -306,24 +311,70 @@ function Create() {
 
           {/* ---- small DIV - Port  ----- */}
 
-          {/* ---- Conditional Div ----
-          {showConditionalDiv && (
-            <div
-              className={styles.conditionalDiv}
-              style={{
-                position: "absolute",
-                bottom: 0,
-                width: "100%",
-                backgroundColor: "#23263A",
-                color: "white",
-                padding: "1rem",
-                textAlign: "center",
-              }}
-            >
-              This is a conditional div that appears when `conf.d` and either
-              `Next.JS` or `Python Flask` are selected!
-            </div>
-          )} */}
+          <div className={styles.divInputGroupRadio}>
+            <span className={`${styles.spanLabel}`}>Nginx dir: </span>
+            <span className={styles.spanRadio}>
+              <form className={styles.form}>
+                {/* <label className={styles.labelRadio}> */}
+                <label
+                  className={
+                    selectedStoreNginxFilePathRadio ===
+                    `${user.currentMachineDisplay.userHomeDir}`
+                      ? styles.labelRadioSelected
+                      : styles.labelRadio
+                  }
+                >
+                  {user.currentMachineDisplay.userHomeDir.includes(
+                    "Env var not found"
+                  ) ? null : (
+                    <input
+                      name="storeNginxDir"
+                      type="radio"
+                      value={user.currentMachineDisplay.userHomeDir}
+                      checked={
+                        selectedStoreNginxFilePathRadio ===
+                        `${user.currentMachineDisplay.userHomeDir}`
+                      }
+                      // onChange={handleRadioNginx}
+                      onChange={
+                        (e) =>
+                          selectedStoreNginxFilePathRadioSetter(e.target.value)
+                        // selectNginxDir(e.target.value)
+                      }
+                    />
+                  )}
+                  {user.currentMachineDisplay.userHomeDir}
+                </label>
+                <label
+                  className={
+                    selectedStoreNginxFilePathRadio ===
+                    `${user.currentMachineDisplay.nginxDir}`
+                      ? styles.labelRadioSelected
+                      : styles.labelRadio
+                  }
+                >
+                  {user.currentMachineDisplay.nginxDir.includes(
+                    "Env var not found"
+                  ) ? null : (
+                    <input
+                      name="storeNginxDir"
+                      type="radio"
+                      value={user.currentMachineDisplay.nginxDir}
+                      checked={
+                        selectedStoreNginxFilePathRadio ===
+                        user.currentMachineDisplay.nginxDir
+                      }
+                      onChange={(e) =>
+                        selectedStoreNginxFilePathRadioSetter(e.target.value)
+                      }
+                    />
+                  )}
+                  {user.currentMachineDisplay.nginxDir}
+                </label>
+              </form>
+            </span>
+          </div>
+          {/* ---- Nginx Dir Radio Group ----- */}
 
           <div className={styles.divBtnCreateFile}>
             <button
