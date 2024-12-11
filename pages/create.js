@@ -89,6 +89,7 @@ function Create() {
       cwdSetter("");
       localIpSetter("");
       portSetter("");
+      selectedStoreNginxFilePathRadioSetter("");
       window.alert(`Succsess! ${resJson.message}`);
     } else if (response.status == 401) {
       const resJson = await response.json();
