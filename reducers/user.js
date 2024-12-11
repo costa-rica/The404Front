@@ -14,7 +14,6 @@ const initialState = {
       userHomeDir: null,
       nginxDir: null,
     },
-    // allMachines: [],
   },
 };
 
