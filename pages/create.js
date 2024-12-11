@@ -31,8 +31,8 @@ function Create() {
   // Determine if the div should be visible
   const showCwd =
     selectedRadioNginx === "Confd" &&
-    (selectedRadioFramework === "NextJs" ||
-      selectedRadioFramework === "PythonFlask");
+    (selectedRadioFramework === "nextJs" ||
+      selectedRadioFramework === "pythonFlask");
 
   const btnCreateFile = async () => {
     let serverNamesStringCommaSeparated = serverNames.join(",");
@@ -163,7 +163,7 @@ function Create() {
                 </label>
                 <label
                   className={
-                    selectedRadioFramework === "NextJs"
+                    selectedRadioFramework === "nextJs"
                       ? styles.labelRadioSelected
                       : styles.labelRadio
                   }
@@ -171,8 +171,8 @@ function Create() {
                   <input
                     name="framework"
                     type="radio"
-                    value="NextJs"
-                    checked={selectedRadioFramework === "NextJs"}
+                    value="nextJs"
+                    checked={selectedRadioFramework === "nextJs"}
                     onChange={(e) =>
                       selectedRadioFrameworkSetter(e.target.value)
                     }
@@ -181,7 +181,7 @@ function Create() {
                 </label>
                 <label
                   className={
-                    selectedRadioFramework === "PythonFlask"
+                    selectedRadioFramework === "pythonFlask"
                       ? styles.labelRadioSelected
                       : styles.labelRadio
                   }
@@ -189,8 +189,8 @@ function Create() {
                   <input
                     name="framework"
                     type="radio"
-                    value="PythonFlask"
-                    checked={selectedRadioFramework === "PythonFlask"}
+                    value="pythonFlask"
+                    checked={selectedRadioFramework === "pythonFlask"}
                     onChange={(e) =>
                       selectedRadioFrameworkSetter(e.target.value)
                     }
