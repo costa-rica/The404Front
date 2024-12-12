@@ -6,10 +6,12 @@ export default function StatusTableRow(props) {
   const user = useSelector((state) => state.user.value);
   const [appStatus, appStatusSetter] = useState(props.elem.status);
   const [additionalRowsVisible, additionalRowsVisibleSetter] = useState(false);
+  // const [additionalInnerRowsVisible, additionalInnerRowsVisibleSetter] = useState(false);
   const toggleAdditionalRowsVisible = () => {
     console.log("--> toggling");
     additionalRowsVisibleSetter((prev) => !prev);
   };
+
   const toggleStatus = async () => {
     const appName = props.elem.nameOfApp;
     console.log(`- in toggleStatus: ${appName}`);
@@ -60,17 +62,14 @@ export default function StatusTableRow(props) {
     console.log(item.nodeEnv);
     listOfInnerElements.push(
       <div key={counter}>
-        <div className={styles.divAddContentTitle}>
-          Local IP Address (:port) of Machine:
+        <div className={styles.hidePortOnBig}>
+          <div className={styles.divAddContentTitle}>
+            Local IP Address (:port) of Machine:
+          </div>
+          <div className={styles.divAddContent}>
+            {props.elem.localIpOfMachine}:{props.elem.port}
+          </div>
         </div>
-        <div className={styles.divAddContent}>
-          {props.elem.localIpOfMachine}:{props.elem.port}
-        </div>
-        <div className={styles.divAddContentTitle}>Machine Name:</div>
-        <div className={styles.divAddContent}>{item.machineName}</div>
-
-        <div className={styles.divAddContentTitle}>filename:</div>
-        <div className={styles.divAddContent}>{item.filename}</div>
         <div className={styles.divAddContentTitle}>urls:</div>
         {Array.from({ length: item.urls.length }, (_, index) => (
           <div className={styles.divAddContent}>
@@ -78,14 +77,26 @@ export default function StatusTableRow(props) {
             {")"} {item.urls[index]}
           </div>
         ))}
-        <div className={styles.divAddContentTitle}>
-          Nginx File Last Modified:
+        <div
+          className={`${styles.additionalInnerContent} ${
+            additionalRowsVisible ? styles.visible : styles.hidden
+          }`}
+        >
+          <div className={styles.divAddContentTitle}>Machine Name:</div>
+          <div className={styles.divAddContent}>{item.machineName}</div>
+
+          <div className={styles.divAddContentTitle}>filename:</div>
+          <div className={styles.divAddContent}>{item.filename}</div>
+
+          <div className={styles.divAddContentTitle}>
+            Nginx File Last Modified:
+          </div>
+          <div className={styles.divAddContent}>{item.dateFileModified}</div>
+          <div className={styles.divAddContentTitle}>
+            Database Record Last Modified:
+          </div>
+          <div className={styles.divAddContent}>{item.dateRecordModified}</div>
         </div>
-        <div className={styles.divAddContent}>{item.dateFileModified}</div>
-        <div className={styles.divAddContentTitle}>
-          Database Record Last Modified:
-        </div>
-        <div className={styles.divAddContent}>{item.dateRecordModified}</div>
       </div>
     );
     counter++;
@@ -100,19 +111,28 @@ export default function StatusTableRow(props) {
             additionalRowsVisible ? styles.visible : styles.hidden
           }`}
         >
-          <div className={styles.divAddContentTitle}>NODE_ENV:</div>
-          <div className={styles.divAddContent}>{props.elem.nodeEnv}</div>
           {listOfInnerElements}
+          <div
+            className={`${styles.additionalInnerContent} ${
+              additionalRowsVisible ? styles.visible : styles.hidden
+            }`}
+          >
+            <div className={styles.divAddContentTitle}>NODE_ENV:</div>
+            <div className={styles.divAddContent}>{props.elem.nodeEnv}</div>
+          </div>
         </div>
       </td>
-      <td className={styles.tdPort}>{props.elem.port}</td>
+      <td className={styles.tdPort}>
+        {props.elem.localIpOfMachine}:{props.elem.port}
+      </td>
       <td className={styles.tdBtnStatus}>
         {props.elem.machineName === user.currentMachineDisplay.machineName ? (
           <button
             className={styles.btnStatus}
             onClick={() => toggleStatus()}
             style={{
-              backgroundColor: appStatus === "online" ? "green" : "",
+              backgroundColor: appStatus === "online" ? "#4ad22b" : "gray",
+              color: appStatus === "online" ? "black" : "black",
             }}
           >
             {appStatus}

@@ -71,6 +71,28 @@ function Machines() {
     dispatch(setCurrentMachineDisplay(objMachineNameAndUrl));
   };
 
+  const btnReload = async () => {
+    const response = await fetch(
+      `${user.currentMachineDisplay.urlFor404Api}/status/combined-update`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`, // Add token to Authorization header
+        },
+      }
+    );
+    if (response.status == 200) {
+      const resJson = await response.json();
+      window.alert("Success! \nUpdated statuses of all apps on this machine");
+      // machineListRowsSetter(resJson.existingMachines);
+      // console.log("--- machineListRows ---");
+      // console.log(resJson.existingMachines);
+    } else {
+      window.alert(`There was a server error: ${response.status}`);
+    }
+  };
+
   return (
     <TemplateView>
       <div className={styles.machinePage}>
@@ -138,7 +160,7 @@ function Machines() {
                         {elem.urlFor404Api}
                       </div>
                       <div className={styles.tdMachineNameBtnReload}>
-                        <button>Reload</button>
+                        <button onClick={() => btnReload()}>Reload</button>
                       </div>
                     </td>
                     <td className={styles.tdConnectedMachine}>

@@ -53,21 +53,7 @@ export default function Status() {
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              {/* <tr>
-                <td>Frist</td>
-                <td className={styles.thPort}>Row</td>
-                <td>to see</td>
-              </tr> */}
-              {appListRows}
-              {/* {Array.from({ length: 100 }, (_, index) => (
-                <tr key={index}>
-                  <td>Row {index + 1} Data 1</td>
-                  <td>Row {index + 1} Data 2</td>
-                  <td>Row {index + 1} Data 3</td>
-                </tr>
-              ))} */}
-            </tbody>
+            <tbody>{appListRows}</tbody>
           </table>
         </div>
       </div>

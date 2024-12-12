@@ -14,6 +14,18 @@
 .additionalContent.hidden {
   display: none;
 }
+/* Show additional content when toggled */
+.additionalInnerContent {
+  display: block;
+  /* background-color: purple; */
+}
+.additionalInnerContent.visible {
+  display: block;
+}
+
+.additionalInnerContent.hidden {
+  display: none;
+}
 
 .divAddContentTitle {
   color: var(--med-text-color);
@@ -34,6 +46,7 @@
 .btnStatus {
   border-radius: 12px;
   padding: 0.25rem;
+  color: var(--light-text-color);
 }
 .tdDivNameOfApp {
   color: var(--highlight-yellow);
@@ -41,9 +54,13 @@
 }
 .tdPort {
   display: none;
+  color: var(--highlight-green);
 }
 /* Large screens (media query) */
 @media (min-width: 768px) {
+  .hidePortOnBig {
+    display: none;
+  }
   .additionalContent {
     display: block !important; /* Override visibility state */
   }
