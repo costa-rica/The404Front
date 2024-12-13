@@ -38,6 +38,7 @@ export default function NavigationBar() {
           <h2 className={styles.h2MachineName}>
             {user.currentMachineDisplay.machineName}
           </h2>
+          {user.currentMachineDisplay.urlFor404Api}
         </div>
         <div className={styles.divHeaderRight}>
           <button
@@ -100,6 +101,16 @@ export default function NavigationBar() {
                 href="/create"
               >
                 Create
+              </a>
+            </li>
+            <li className={styles.divHeaderRightLi}>
+              <a
+                className={
+                  currentPath === "/nginx" ? styles.btnNavActive : styles.btnNav
+                }
+                href="/nginx"
+              >
+                Nginx
               </a>
             </li>
           </ul>

@@ -1,0 +1,204 @@
+.tabsContainer {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  position: fixed;
+  top: 10rem;
+  left: 0;
+  right: 0;
+  z-index: 9; /* Ensures the tabs appear above other content */
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+.activeTab {
+  background-color: #0070f3;
+  color: white;
+}
+
+.contentContainer {
+  padding: 20px;
+  /* background-color: green; */
+  background-color: var(--background-color);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 13rem;
+  height: 100vh;
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Horizontally center tableSuper */
+  align-items: flex-start;
+}
+.tableSuper {
+  width: 95%; /* Constrain the table's width to 95% of the container */
+  display: flex; /* Use flexbox for its child (the table) */
+  justify-content: center; /* Center the table horizontally */
+  /* background-color: green; */
+}
+.table {
+  /* background-color: green; */
+  width: 100%;
+}
+.thAppName {
+  display: flex;
+  justify-content: flex-start;
+}
+.tdFilename {
+  padding-bottom: 1rem;
+  word-wrap: break-word; /* Ensure long words or URLs wrap */
+  overflow-wrap: break-word; /* Ensure wrapping in modern browsers */
+  word-break: break-all; /* Break words at arbitrary points for extremely long text */
+  hyphens: auto; /* Adds hyphenation when possible */
+}
+.divTdFilename {
+  font-size: larger;
+  color: white;
+}
+/* .table tbody td {
+  border-bottom: 1px solid #ccc;
+} */
+.divTdIpAndPort {
+  color: var(--med-text-color);
+}
+
+.tdRemove {
+  /* background-color: purple; */
+  height: 100%; /* Take full height of the row */
+  vertical-align: middle; /* Align content vertically */
+  text-align: center; /* Center horizontally */
+  display: table-cell; /* Ensure it behaves like a standard table cell */
+}
+.divTdRemove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: green; */
+}
+.btnRemove {
+  background-color: transparent;
+  /* background-color: blue; */
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+.iconDelete {
+  color: rgba(200, 70, 50, 100);
+  font-size: x-large;
+}
+/* Makes thead background color of blue and add line below that sticks*/
+.table thead {
+  position: sticky;
+  top: 40px; /* Keep the entire thead at the top */
+  z-index: 1; /* Ensure it remains above table rows */
+  background-color: white; /* Set background to avoid transparency */
+  background-color: var(--background-color);
+}
+.table thead::after {
+  content: ""; /* Create a pseudo-element */
+  display: block; /* Ensure it acts as a block element */
+  position: absolute; /* Position relative to thead */
+  bottom: 0; /* Stick to the bottom of the thead */
+  left: 0;
+  width: 100%;
+  height: 1px; /* Thickness of the border */
+  background-color: #ddd; /* Match border color */
+}
+
+/* Modal */
+
+.openModalButton {
+  /* padding: 10px 20px; */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.openModalButton:hover {
+  background-color: #0056b3;
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* Ensure it's above all other content */
+}
+
+/* Modal Content */
+.modalContent {
+  background: black;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word; /* Ensure long words or URLs wrap */
+  overflow-wrap: break-word; /* Ensure wrapping in modern browsers */
+  word-break: break-all; /* Break words at arbitrary points for extremely long text */
+  hyphens: auto; /* Adds hyphenation when possible */
+}
+.modalTop {
+  position: relative;
+}
+/* Close Icon */
+.closeModalIcon {
+  position: absolute;
+  top: -2rem;
+  right: -10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.closeModalIcon:hover {
+  color: var(--med-text-color);
+}
+
+.divModalFilename {
+  padding: 1rem;
+  text-align: start;
+}
+.divModalFilename div {
+  /* border-bottom: 1px solid var(--med-text-color); */
+  margin-bottom: 1rem;
+}
+.btnYesDelete {
+  background-color: var(--highlight-red);
+  color: white;
+  font-size: large;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border-width: 0;
+  cursor: pointer;
+}
+
+/* Large screens (media query) */
+@media (min-width: 768px) {
+  .tableSuper {
+    width: 75%; /* Constrain the table's width to 95% of the container */
+  }
+}
