@@ -150,7 +150,17 @@ export default function Nginx() {
                         {elem.filename}
                       </div>
 
-                      <div className={styles.divTdIpAndPort}>{elem.port}</div>
+                      <div className={styles.divTdIpAndPort}>
+                        {activeTab === "sitesAvailable"
+                          ? `${elem.localIpOfApp}:`
+                          : null}
+                        {elem.port}
+                      </div>
+                      {activeTab === "sitesAvailable" ? (
+                        <div className={styles.divTdIpAndPort}>
+                          {elem.machineName}
+                        </div>
+                      ) : null}
                     </td>
                     <td className={styles.tdRemove}>
                       <div className={styles.divTdRemove}>
