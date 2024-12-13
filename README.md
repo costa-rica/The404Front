@@ -72,3 +72,8 @@ function App({ Component, pageProps }) {
   font-family: var(--font-jetbrains-mono), monospace;
 }
 ```
+
+## icon credits
+
+1. red x
+   source: <a href="https://www.flaticon.com/free-icons/delete" title="delete icons">Delete icons created by Pixel perfect - Flaticon</a>
