@@ -10,7 +10,14 @@ export default function Login() {
   const [password, passwordSetter] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
-  const user = useSelector((state) => state.user.value);
+  const userReducer = useSelector((state) => state.user.value);
+
+  useEffect(() => {
+    if (userReducer.token) {
+      // Redirect if token exists
+      router.push("/status");
+    }
+  }, [userReducer]); // Run effect if token changes
 
   const sendPasswordBackToParent = (passwordFromInputPasswordElement) => {
     passwordSetter(passwordFromInputPasswordElement);
@@ -18,12 +25,14 @@ export default function Login() {
 
   const handleClickLogin = async () => {
     console.log("Login ---> API URL");
-    console.log(`${user.currentMachineDisplay.urlFor404Api}/users/login`);
+    console.log(
+      `${userReducer.currentMachineDisplay.urlFor404Api}/users/login`
+    );
     console.log("- handleClickReg 👀");
     const bodyObj = { email, password };
 
     const response = await fetch(
-      `${user.currentMachineDisplay.urlFor404Api}/users/login`,
+      `${userReducer.currentMachineDisplay.urlFor404Api}/users/login`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -51,7 +60,7 @@ export default function Login() {
       <div className={styles.divMainSub}>
         <div className={styles.divTitles}>
           <h1 className={styles.title}>The 404 Server Manager</h1>
-          <h2>{user.machineName}</h2>
+          <h2>{userReducer.machineName}</h2>
         </div>
         <div className={styles.divInputsAndBtns}>
           <div className={styles.divSuperInput}>

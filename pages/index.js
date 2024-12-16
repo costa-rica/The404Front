@@ -9,7 +9,8 @@ import { useRouter } from "next/router";
 function Index() {
   console.log("start ---> URL");
   console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/machineName`);
-  const user = useSelector((state) => state.user.value);
+  // const user = useSelector((state) => state.user.value);
+  const userReducer = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -44,6 +45,10 @@ function Index() {
           })
         );
       }
+      if (userReducer.token) {
+        // Redirect if token exists
+        router.push("/status");
+      }
     })();
   }, []);
 
@@ -55,7 +60,7 @@ function Index() {
       <div className={styles.divMainSub}>
         <div className={styles.divTitles}>
           <h1 className={styles.title}>The 404 Server Manager</h1>
-          <h2>{user.currentMachineDisplay.machineName}</h2>
+          <h2>{userReducer.currentMachineDisplay.machineName}</h2>
         </div>
 
         <div className={styles.divInputsAndBtns}>
