@@ -49,6 +49,9 @@ export default function StatusTableRow(props) {
           ? "online"
           : "offline"
       );
+    } else if (response.status == 401) {
+      const responseJson = await response.json();
+      window.alert(`There was a server error: ${responseJson.message}`);
     } else {
       window.alert(`There was a server error: ${response.status}`);
     }

@@ -7,51 +7,53 @@ import { setCurrentMachineDisplay } from "../reducers/user";
 import { useRouter } from "next/router";
 
 function Index() {
-  console.log("start ---> URL");
-  console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/machineName`);
+  console.log(
+    `home/index page URL: ${process.env.NEXT_PUBLIC_API_BASE_URL}/machineName`
+  );
   // const user = useSelector((state) => state.user.value);
   const userReducer = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    console.log("---> inside useEffect NO Async");
-    (async () => {
-      console.log("---> inside useEffect Async");
-      try {
-        console.log("NEXT_PUBLIC_API_BASE_URL");
-        console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
-        console.log("API URL is : ");
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/machineName`
-        );
-        const responseJson = await response.json();
-        console.log(responseJson);
-        const currentMachineDisplay = {
-          machineName: responseJson.machineName,
-          urlFor404Api: responseJson.urlFor404Api,
-          userHomeDir: responseJson.userHomeDir,
-          nginxDir: responseJson.nginxDir,
-        };
-
-        dispatch(setCurrentMachineDisplay(currentMachineDisplay));
-      } catch {
-        console.error("NICK Custom error ====> ");
-        console.error("Error fetching data:");
-        dispatch(
-          setCurrentMachineDisplay({
-            machineName: "failed to get API response",
-            urlFor404Api: null,
-          })
-        );
-      }
-      if (userReducer.token) {
-        // Redirect if token exists
-        router.push("/status");
-      }
-    })();
+    fetchMachineName();
   }, []);
 
+  const fetchMachineName = async () => {
+    console.log(" inside fetchMachineName");
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/machineName`
+      );
+      const responseJson = await response.json();
+      console.log(responseJson);
+      const currentMachineDisplay = {
+        machineName: responseJson.machineName,
+        urlFor404Api: responseJson.urlFor404Api,
+        userHomeDir: responseJson.userHomeDir,
+        nginxDir: responseJson.nginxDir,
+      };
+
+      dispatch(setCurrentMachineDisplay(currentMachineDisplay));
+      console.log(" finished fetchMachineName");
+    } catch {
+      console.error("NICK Custom error ====> ");
+      console.error("Error fetching data:");
+      dispatch(
+        setCurrentMachineDisplay({
+          machineName: "failed to get API response",
+          urlFor404Api: null,
+        })
+      );
+    }
+    if (userReducer.token) {
+      console.log(
+        " finished fetchMachineName > token exists > goign to /status"
+      );
+      // Redirect if token exists
+      router.push("/status");
+    }
+  };
   const handleClickToLogin = () => router.push("/login");
   const handleClickToReg = () => router.push("/register");
 
