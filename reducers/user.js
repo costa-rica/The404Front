@@ -11,8 +11,9 @@ const initialState = {
     currentMachineDisplay: {
       machineName: "Not machine connected yet",
       urlFor404Api: null,
-      userHomeDir: null,
-      nginxDir: null,
+      nginxStoragePathOptions: [],
+      // userHomeDir: null,
+      // nginxDir: null,
     },
   },
 };

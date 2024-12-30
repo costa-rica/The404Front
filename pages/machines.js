@@ -177,8 +177,10 @@ function Machines() {
                           btnDisplay({
                             machineName: elem.machineName,
                             urlFor404Api: elem.urlFor404Api,
-                            userHomeDir: elem.userHomeDir,
-                            nginxDir: elem.nginxDir,
+                            nginxStoragePathOptions:
+                              elem.nginxStoragePathOptions,
+                            // userHomeDir: elem.userHomeDir,
+                            // nginxDir: elem.nginxDir,
                           })
                         }
                       >

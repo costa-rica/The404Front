@@ -30,8 +30,9 @@ function Index() {
       const currentMachineDisplay = {
         machineName: responseJson.machineName,
         urlFor404Api: responseJson.urlFor404Api,
-        userHomeDir: responseJson.userHomeDir,
-        nginxDir: responseJson.nginxDir,
+        nginxStoragePathOptions: responseJson.nginxStoragePathOptions,
+        // userHomeDir: responseJson.userHomeDir,
+        // nginxDir: responseJson.nginxDir,
       };
 
       dispatch(setCurrentMachineDisplay(currentMachineDisplay));

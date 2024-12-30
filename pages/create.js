@@ -18,6 +18,32 @@ function Create() {
     selectedStoreNginxFilePathRadioSetter,
   ] = useState("");
 
+  //  const fetchFilePaths = async ()=>{
+  //   console.log("--- in useEffect Logs ---");
+  //   console.log(`${user.currentMachineDisplay.urlFor404Api}/create`);
+  //   const response = await fetch(
+  //     `${user.currentMachineDisplay.urlFor404Api}/crate`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${user.token}`, // Add token to Authorization header
+  //       },
+  //     }
+  //   );
+
+  //   if (response.status == 200) {
+  //     const responseJson = await response.json();
+  //     console.log("response: ");
+  //     console.log(responseJson);
+  //     nginxLocationSetter(responseJson);
+  //   } else {
+  //     window.alert(
+  //       `There was a server error or you're not logged in: ${response.status}`
+  //     );
+  //   }
+  //  }
+
   const handleServerNameChange = (index, value) => {
     const updatedServerNames = [...serverNames];
     updatedServerNames[index] = value;
@@ -317,61 +343,38 @@ function Create() {
             <span className={styles.spanRadio}>
               <form className={styles.form}>
                 {/* <label className={styles.labelRadio}> */}
-                <label
-                  className={
-                    selectedStoreNginxFilePathRadio ===
-                    `${user.currentMachineDisplay.userHomeDir}`
-                      ? styles.labelRadioSelected
-                      : styles.labelRadio
+
+                {user.currentMachineDisplay.nginxStoragePathOptions.map(
+                  (elem, index) => {
+                    return (
+                      <label
+                        className={
+                          selectedStoreNginxFilePathRadio === `${elem}`
+                            ? styles.labelRadioSelected
+                            : styles.labelRadio
+                        }
+                      >
+                        <input
+                          name="storeNginxDir"
+                          type="radio"
+                          value={elem}
+                          checked={
+                            selectedStoreNginxFilePathRadio === `${elem}`
+                          }
+                          // onChange={handleRadioNginx}
+                          onChange={
+                            (e) =>
+                              selectedStoreNginxFilePathRadioSetter(
+                                e.target.value
+                              )
+                            // selectNginxDir(e.target.value)
+                          }
+                        />
+                        {elem}
+                      </label>
+                    );
                   }
-                >
-                  {user.currentMachineDisplay.userHomeDir.includes(
-                    "Env var not found"
-                  ) ? null : (
-                    <input
-                      name="storeNginxDir"
-                      type="radio"
-                      value={user.currentMachineDisplay.userHomeDir}
-                      checked={
-                        selectedStoreNginxFilePathRadio ===
-                        `${user.currentMachineDisplay.userHomeDir}`
-                      }
-                      // onChange={handleRadioNginx}
-                      onChange={
-                        (e) =>
-                          selectedStoreNginxFilePathRadioSetter(e.target.value)
-                        // selectNginxDir(e.target.value)
-                      }
-                    />
-                  )}
-                  {user.currentMachineDisplay.userHomeDir}
-                </label>
-                <label
-                  className={
-                    selectedStoreNginxFilePathRadio ===
-                    `${user.currentMachineDisplay.nginxDir}`
-                      ? styles.labelRadioSelected
-                      : styles.labelRadio
-                  }
-                >
-                  {user.currentMachineDisplay.nginxDir.includes(
-                    "Env var not found"
-                  ) ? null : (
-                    <input
-                      name="storeNginxDir"
-                      type="radio"
-                      value={user.currentMachineDisplay.nginxDir}
-                      checked={
-                        selectedStoreNginxFilePathRadio ===
-                        user.currentMachineDisplay.nginxDir
-                      }
-                      onChange={(e) =>
-                        selectedStoreNginxFilePathRadioSetter(e.target.value)
-                      }
-                    />
-                  )}
-                  {user.currentMachineDisplay.nginxDir}
-                </label>
+                )}
               </form>
             </span>
           </div>
