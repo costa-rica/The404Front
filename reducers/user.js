@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: {
     token: null,
-    username: null,
+    // username: null,
     email: null,
-    role: null,
+    // role: null,
     // machineName: null,
     password: null,
     currentMachineDisplay: {
@@ -29,8 +29,8 @@ export const userSlice = createSlice({
     loginUser: (state, action) => {
       console.log(`- dans Redux: loginUser 🔔`);
       state.value.token = action.payload.token;
-      state.value.username = action.payload.username;
-      state.value.role = action.payload.role;
+      // state.value.username = action.payload.username;
+      // state.value.role = action.payload.role;
       state.value.email = action.payload.email;
       console.log(`- finished loginUser 🏁`);
     },

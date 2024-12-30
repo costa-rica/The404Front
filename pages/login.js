@@ -44,8 +44,7 @@ export default function Login() {
       const resJson = await response.json();
       console.log(resJson);
       dispatch(loginUser(resJson));
-      console.log(resJson);
-      dispatch(loginUser(resJson));
+
       router.push("/status");
     } else {
       window.alert(`There was a server error: ${response.status}`);

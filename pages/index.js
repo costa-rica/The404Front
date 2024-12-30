@@ -2,7 +2,7 @@ import styles from "../styles/Index.module.css";
 import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-// import { setMachineNameRedux } from "../reducers/user";
+import { loginUser } from "../reducers/user";
 import { setCurrentMachineDisplay } from "../reducers/user";
 import { useRouter } from "next/router";
 
@@ -31,14 +31,11 @@ function Index() {
         machineName: responseJson.machineName,
         urlFor404Api: responseJson.urlFor404Api,
         nginxStoragePathOptions: responseJson.nginxStoragePathOptions,
-        // userHomeDir: responseJson.userHomeDir,
-        // nginxDir: responseJson.nginxDir,
       };
 
       dispatch(setCurrentMachineDisplay(currentMachineDisplay));
       console.log(" finished fetchMachineName");
     } catch {
-      console.error("NICK Custom error ====> ");
       console.error("Error fetching data:");
       dispatch(
         setCurrentMachineDisplay({
@@ -48,15 +45,42 @@ function Index() {
       );
     }
     if (userReducer.token) {
-      console.log(
-        " finished fetchMachineName > token exists > goign to /status"
-      );
       // Redirect if token exists
       router.push("/status");
     }
   };
   const handleClickToLogin = () => router.push("/login");
   const handleClickToReg = () => router.push("/register");
+  const handleClickLoginAsGuest = async () => {
+    console.log("from index page click browse as a guest ---> API URL");
+    console.log(
+      `${userReducer.currentMachineDisplay.urlFor404Api}/users/login`
+    );
+    console.log("- handleClickReg 👀");
+    const bodyObj = {
+      email: process.env.NEXT_PUBLIC_GUEST_EMAIL,
+      password: process.env.NEXT_PUBLIC_GUEST_PASSWORD,
+    };
+
+    const response = await fetch(
+      `${userReducer.currentMachineDisplay.urlFor404Api}/users/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyObj),
+      }
+    );
+    console.log("received response");
+    if (response.status == 200) {
+      const resJson = await response.json();
+      console.log(resJson);
+      dispatch(loginUser(resJson));
+      router.push("/status");
+    } else {
+      window.alert(`There was a server error: ${response.status}`);
+    }
+    console.log("🚨 after the fetch ");
+  };
 
   return (
     <div className={styles.main}>
@@ -75,12 +99,20 @@ function Index() {
               Login
             </button>
           </div>
-          <div className={styles.divBtnRegister}>
+          {/* <div className={styles.divBtnRegister}>
             <button
               className={styles.btnRegister}
               onClick={() => handleClickToReg()}
             >
               Register
+            </button>
+          </div> */}
+          <div className={styles.divBtnBrowseAsAGuest}>
+            <button
+              className={styles.btnBrowseAsAGuest}
+              onClick={() => handleClickLoginAsGuest()}
+            >
+              Browse as a guest
             </button>
           </div>
         </div>

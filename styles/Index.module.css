@@ -55,3 +55,14 @@
   width: 15rem;
   color: var(--light-text-color);
 }
+.divBtnBrowseAsAGuest {
+  padding-top: 1rem;
+}
+.btnBrowseAsAGuest {
+  background-color: var(--highlight-red);
+  border-radius: 12px;
+  font-size: large;
+  padding: 1rem;
+  width: 15rem;
+  color: var(--light-text-color);
+}
