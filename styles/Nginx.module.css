@@ -35,11 +35,13 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-top: 13rem;
-  height: 100vh;
+  /* height: 100vh; */
+  min-height: 100vh; /* necessary for table background color to adjust to both short and long lists */
   display: flex; /* Use flexbox for alignment */
   justify-content: center; /* Horizontally center tableSuper */
   align-items: flex-start;
 }
+
 .tableSuper {
   width: 95%; /* Constrain the table's width to 95% of the container */
   display: flex; /* Use flexbox for its child (the table) */

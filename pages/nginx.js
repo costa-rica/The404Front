@@ -23,32 +23,6 @@ export default function Nginx() {
 
   useEffect(() => {
     fetchFiles();
-    // (async () => {
-    //   console.log("--- in useEffect Logs ---");
-    //   console.log(`${user.currentMachineDisplay.urlFor404Api}/nginx/combined`);
-    //   const response = await fetch(
-    //     `${user.currentMachineDisplay.urlFor404Api}/nginx/combined`,
-    //     {
-    //       method: "GET",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Bearer ${user.token}`, // Add token to Authorization header
-    //       },
-    //     }
-    //   );
-
-    //   if (response.status == 200) {
-    //     const responseJson = await response.json();
-    //     console.log("response: ");
-    //     console.log(responseJson);
-    //     nginxLocationSetter(responseJson);
-
-    //   } else {
-    //     window.alert(
-    //       `There was a server error or you're not logged in: ${response.status}`
-    //     );
-    //   }
-    // })(); // end of async ()
   }, []);
 
   const fetchFiles = async () => {
@@ -108,18 +82,12 @@ export default function Nginx() {
   };
 
   return (
-    // <main className={styles.mainStatus}>
-    //   <HeaderCustom />
     <TemplateView>
       <div style={{ position: "relative" }}>
         <div className={styles.tabsContainer}>
           {["confd", "sitesAvailable"].map((tab) => (
             <button
               key={tab}
-              //   style={{
-              //     ...styles.tab,
-              //     ...(activeTab === tab ? styles.activeTab : {}),
-              //   }}
               className={`${styles.tab} ${
                 activeTab === tab ? styles.activeTab : ""
               }`}
@@ -176,12 +144,6 @@ export default function Nginx() {
                           }}
                           className={styles.iconDelete}
                         />
-                        {/* <Image
-                          src="/images/remove.png"
-                          width={20}
-                          height={20}
-                          alt="Picture of the author"
-                        /> */}
                       </div>
                     </td>
                   </tr>
@@ -223,50 +185,5 @@ export default function Nginx() {
         </div>
       )}
     </TemplateView>
-    // </main>
   );
 }
-
-// const styles = {
-//   tabsContainer: {
-//     display: "flex",
-//     justifyContent: "space-around",
-//     backgroundColor: "#f4f4f4",
-//     padding: "10px",
-//     borderBottom: "1px solid #ccc",
-//     position: "fixed", // Makes the tabs stay at the top
-//     top: "10rem",
-//     left: 0,
-//     right: 0,
-//     zIndex: 1000, // Ensures the tabs appear above other content
-//   },
-//   tab: {
-//     flex: 1,
-//     padding: "10px",
-//     cursor: "pointer",
-//     textAlign: "center",
-//     backgroundColor: "#e0e0e0",
-//     border: "none",
-//     borderRadius: "4px",
-//     margin: "0 5px",
-//     fontWeight: "bold",
-//   },
-//   activeTab: {
-//     backgroundColor: "#0070f3",
-//     color: "white",
-//   },
-//   contentContainer: {
-//     padding: "20px",
-//     backgroundColor: "black",
-//     border: "1px solid #ccc",
-//     borderRadius: "4px",
-//     marginTop: "13rem",
-//   },
-//   logContent: {
-//     whiteSpace: "pre-wrap",
-//     wordWrap: "break-word",
-//     fontFamily: "monospace",
-//     fontSize: "14px",
-//     color: "white",
-//   },
-// };
